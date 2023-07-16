@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Create User</title>
+</head>
+<body>
+<form action="/user/register" method="post" th:object="${user}" >
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" th:value="*{email}">
+
+    <label for="username">UserName</label>
+    <input type="text" id="username" name="username" th:field="*{username}">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" th:field="*{password}">
+
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>

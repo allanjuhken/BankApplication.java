@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Bank</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/admin/account/create}">Create Account  <span class="sr-only">(current)</span> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/transaction/create}">Create Transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/customer/create}">Create Customer</a>
+            </li>
+            <li class="nav-item">
+                <a id="logout" th:href="@{/logout}">Log Out</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+ <table class="table">
+     <thead class="thead-dark">
+     <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Balance</th>
+        <th scope="col">CustomerId</th>
+        <th scope="col">Status</th>
+     </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td scope="row" th:text="${account.id}"></td>
+        <td scope="row" th:text="${account.balance}"></td>
+        <td scope="row" th:text="${account.customerId}"></td>
+        <td scope="row" th:text="${account.status}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

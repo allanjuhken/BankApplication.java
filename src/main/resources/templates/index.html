@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<!--<h1>Customers</h1>-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Bank</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/account/create}">Create Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/transaction/create}">Create Transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/customer/create}">Create Customer</a>
+            </li>
+            <li class="nav-item">
+                <a id="logout" th:href="@{/logout}">Log Out</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+
+<table class="table">
+    <thead class="thread-dark">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Active</th>
+        <th scope="col">Create Account</th>
+        <th scope="col">Show Account</th>
+        <th scope="col">Create Transaction</th>
+        <th scope="col">Show Transactions</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="customerDto : ${customerDtoList}">
+        <td scope="row" th:text="${customerDto.id}"></td>
+        <td scope="row" th:text="${customerDto.name}"></td>
+        <td scope="row" th:text="${customerDto.age}"></td>
+        <td scope="row" th:text="${customerDto.phone}"></td>
+        <td scope="row" th:text="${customerDto.email}"></td>
+        <td scope="row" th:text="${customerDto.active}"></td>
+        <td scope="row"><a th:href="@{/admin/customer/{id}/account (id=${customerDto.id})}">Create Account</a></td>
+        <td scope="row"><a th:href="@{/admin/customer/{id}/accounts (id=${customerDto.id})}">Show Account</a></td>
+        <td scope="row"><a th:href="@{/admin/customer/{id}/account/transaction (id=${customerDto.id})}">Create Transaction</a></td>
+        <td scope="row"><a th:href="@{/admin/customer/{id}/account/transactions (id=${customerDto.id})}">Show Transactions</a></td>
+    </tr>
+    </tbody>
+</table>
+<!--<nav aria-label="Page navigation example">-->
+<!--    <ul class="pagination">-->
+<!--        <li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
+<!--        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--        <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+</body>
+</html>
