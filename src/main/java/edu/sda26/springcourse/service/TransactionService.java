@@ -2,6 +2,7 @@ package edu.sda26.springcourse.service;
 
 import edu.sda26.springcourse.dto.TransactionDto;
 import edu.sda26.springcourse.model.Account;
+import edu.sda26.springcourse.model.BalanceDtoResponse;
 import edu.sda26.springcourse.model.Transaction;
 import edu.sda26.springcourse.model.enums.TransactionType;
 import edu.sda26.springcourse.repository.TransactionRepository;
@@ -103,21 +104,24 @@ public class TransactionService {
        return transactionRepository.save(transaction);
     }
 
-    public void save(Transaction transaction, Account account) {
+    public BalanceDtoResponse save(Transaction transaction, Account account) {
+        Transaction transaction1;
+        Account account1;
         if (transaction.getType().equalsIgnoreCase("Deposit")) {
-            transactionRepository.save(transaction);
-            calculateAccountBalance(transaction, account, "Deposit");
+            transaction1 = transactionRepository.save(transaction);
+            account1 = calculateAccountBalance(transaction, account, "Deposit");
         } else {
              if (transaction.getAmount() > account.getBalance()) {
                  throw new IllegalStateException("Transaction amount exceeded Account Balance");
              }
-             transactionRepository.save(transaction);
-             calculateAccountBalance(transaction, account, "Withdraw");
+             transaction1 = transactionRepository.save(transaction);
+             account1 = calculateAccountBalance(transaction, account, "Withdraw");
         }
+        return new BalanceDtoResponse(transaction1,account1);
     }
 
 
-    private void calculateAccountBalance(Transaction transaction, Account account, String type) {
+    private Account calculateAccountBalance(Transaction transaction, Account account, String type) {
         double total;
 
         if (type.equalsIgnoreCase("Deposit"))
@@ -126,6 +130,6 @@ public class TransactionService {
             total = account.getBalance() - transaction.getAmount();
 
         account.setBalance(total);
-        accountService.save(account.getCustomerId(), account);
+        return accountService.save(account.getCustomerId(), account);
     }
 }

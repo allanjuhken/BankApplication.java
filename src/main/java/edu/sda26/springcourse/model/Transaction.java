@@ -1,10 +1,7 @@
 package edu.sda26.springcourse.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
 public class Transaction {
 
     // 3. Transaction entity that has amount, transaction type and transaction date
